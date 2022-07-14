@@ -11,7 +11,8 @@ export default function Restaurants({term}) {
 
     return(
         <View style={styles.container}>
-            <Text style={styles.header}>Top Restaurants</Text>
+            <Text style={styles.header}>Top Restaurants</Text>  
+            <Text>Well this doesnt' work</Text>
         </View>
     )
 
