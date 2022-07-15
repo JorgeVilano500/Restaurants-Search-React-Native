@@ -1,10 +1,11 @@
-import { FlatList } from "react-native"
+import { FlatList, View} from "react-native"
 import CategoryItem from "./CategoryItem"
 
 
 export default function Categories({categories, setTerm, term}) {
     return (
-        <FlatList
+       <View>
+            <FlatList
         data={categories}
         renderItem={({item, index}) => { // renderItem iterates over commonCategories array
           console.log(item)
@@ -23,5 +24,6 @@ export default function Categories({categories, setTerm, term}) {
         showsHorizontalScrollIndicator={false}
         />
        
+       </View>
     )
 }

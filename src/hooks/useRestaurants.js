@@ -25,7 +25,7 @@ export default () => {
         }) 
         setResults({
             data: response.data.businesses,
-            loading: true,
+            loading: false,
             error: null
         })
     } catch (error) {
