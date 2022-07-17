@@ -23,6 +23,7 @@ export default function RestaurantScreen({navigation}) {
         <View>
            
            {data && (
+               
                 <FlatList 
                 data={data.photos}
                 keyExtractor={(photo) => photo}

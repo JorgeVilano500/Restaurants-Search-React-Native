@@ -17,12 +17,12 @@ export default function Header () {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 60, 
+        marginTop: 10, 
 
     },
     lightHeader: {
         fontSize: 35, 
-        marginTop: 60, 
+        marginTop: 40, 
         marginHorizontal: 25, 
 
     }, 

@@ -1,13 +1,44 @@
 import { View, Text, StyleSheet, ActivityIndicator, FlatList } from "react-native";
 import useRestaurants from '../hooks/useRestaurants';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import RestaurantItem from "./RestaurantItem";
 
-export default function Restaurants({term}) {
+import * as Location from 'expo-location';
+
+export default function Restaurants({term}, setLoading) {
     const [{data, loading, error}, searchRestaurants] = useRestaurants();
     
+    const [getLocation, setGetLocation] =  useState();
+    const [pin, setPin] = useState({
+        latitude: 37.78825,
+            longitude: -122.4324,
+      })
+    
     useEffect(() => {
-        searchRestaurants(term);
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+              setErrorMsg('Permission to access location was denied');
+              return;
+            }
+      
+            let location = await Location.getCurrentPositionAsync({});
+           setPin({
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude
+            })
+            let regionName = await Location.reverseGeocodeAsync({
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude
+            })
+            setGetLocation(regionName[0].city);
+            console.log(regionName[0].city);
+            console.log(pin)
+            setLoading(false);
+        })();
+        searchRestaurants(term, pin);
+        console.log(getLocation)
+
     }, [term])
     
 
@@ -22,8 +53,9 @@ export default function Restaurants({term}) {
             </View>
         )
     }
+    //example of having an array of styles, one containing an object with styles and another refering an object with style
     return(
-        <View style={styles.container}>
+        <View style={[styles.container, {flex:1}]}> 
             <Text style={styles.header}>Top Restaurants</Text>  
             <FlatList 
             data={data}
@@ -31,6 +63,7 @@ export default function Restaurants({term}) {
             renderItem={({item}) => (
                 <RestaurantItem restaurant={item} />
             )}
+            showsVerticalScrollIndicator={false}
             />
         </View>
     )

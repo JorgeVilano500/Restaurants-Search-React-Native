@@ -1,5 +1,6 @@
-import {useState} from 'react'; 
-import yelp from '../api/yelp'
+import {useState, useEffect} from 'react'; 
+import yelp from '../api/yelp';
+import * as Location from 'expo-location';
 
 
 export default () => {

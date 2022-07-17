@@ -10,6 +10,7 @@ import Restaurants from '../components/Restaurants';
 export default function HomeScreen () {
   // let term = 'Burger'
   const [term, setTerm] = useState('Burger');
+  const [loading, setLoading] = useState(true)
 
   const commonCategories = [
     {
@@ -33,21 +34,33 @@ export default function HomeScreen () {
     {
       name: 'Drinks',
       imageUrl: require('../assets/images/smoothies.png')
+    }, {
+      name: 'Coffee',
+      imageUrl: require('../assets/images/coffee.png')
     }
   ]
 
   // setTimeout(() => {
   //   term='Pizza'
   // }, 3000)
+  {/** 
+if(loading) {
+      return(
+        <View>
+          <Text>Loading</Text>
+        </View>
+      )
+    }
+*/}  
 
 
     return(
         
     <View style={styles.container}>
     <Header />
-    <Text>Fuck</Text>
     <Search 
     setTerm={setTerm}
+
     />
     {/* <CategoryItem 
       name='Burger'
@@ -60,6 +73,7 @@ export default function HomeScreen () {
     />
     <Restaurants
     term={term}
+    setLoading={setLoading}
     />
     <StatusBar style="auto" />
   </View>

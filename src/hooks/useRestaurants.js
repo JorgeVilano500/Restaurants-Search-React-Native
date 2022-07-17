@@ -1,15 +1,17 @@
 import {useState} from 'react'; 
-import yelp from '../api/yelp'
+import yelp from '../api/yelp';
 
 
 export default () => {
+    
+
     const [results, setResults] = useState({
         data: null, 
         loading: false, 
         error: null
     });
 
-    const searchRestaurants = async (term) => {
+    const searchRestaurants = async (term, getLocation) => {
         setResults({
             data: null, 
             loading: true, 
@@ -20,7 +22,9 @@ export default () => {
             params: {
                 limit: 15, 
                 term: term,
-                location: 'San Francisco'
+                latitude: getLocation.latitude, 
+                longitude: getLocation.longitude
+
             }
         }) 
         setResults({
